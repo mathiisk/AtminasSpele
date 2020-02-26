@@ -12,65 +12,22 @@ and open the template in the editor.
         <link rel="stylesheet" href="css/css.css">
     </head>
     <body>
-
+ <button onclick="add()">Pievienot rindu</button>
+        <form id="forma"></form>
         <script>
-var lietas = ['A','A','B','B','C','C','D','D','E','E','F','F','G','G','H','H','I','I','J','J','K','K','L','L'];
-var lietasVer = [];
-var ids = [];
-var flipsk = 0;
-Array.prototype.shuffle = function(){
-    var i = this.length, j, temp;
-    while(--i > 0){
-        j = Math.floor(Math.random() * (i+1));
-        temp = this[j];
-        this[j] = this[i];
-        this[i] = temp;
-    }
-}
-function laukums(){
-	flipsk = 0;
-	var output = '';
-    lietas.shuffle();
-	for(var i = 0; i < lietas.length; i++){
-		output += '<div id="tile_'+i+'" onclick="flip(this,\''+lietas[i]+'\')"></div>';
-	}
-	document.getElementById('lauk').innerHTML = output;
-}
-function flip(tile,val){
-	if(tile.innerHTML == "" && lietasVer.length < 2){
-		tile.style.background = '#FFF';
-		tile.innerHTML = val;
-		if(lietasVer.length == 0){
-			lietasVer.push(val);
-			ids.push(tile.id);
-		} else if(lietasVer.length == 1){
-			lietasVer.push(val);
-			ids.push(tile.id);
-			if(lietasVer[0] == lietasVer[1]){
-				flipsk += 2;
-				lietasVer = [];
-            	ids = [];
-				if(flipsk == lietas.length){
-					alert("Board cleared... generating new board");
-					document.getElementById('lauk').innerHTML = "";
-					laukums();
-				}
-			} else {
-				function flipBack(){
-				    var tile_1 = document.getElementById(ids[0]);
-				    var tile_2 = document.getElementById(ids[1]);
-				    tile_1.style.background = 'url(https://i.stack.imgur.com/IehB7.png) no-repeat';
-            	    tile_1.innerHTML = "";
-				    tile_2.style.background = 'url(https://i.stack.imgur.com/IehB7.png) no-repeat';
-            	    tile_2.innerHTML = "";			  
-				    lietasVer = [];
-            	    ids = [];
-				}
-				setTimeout(flipBack, 700);
-			}
-		}
-	}
-}
+function add(){
+               let i=document.getElementsByClassName("rinda").length;
+               let divs = document.createElement("DIV"); divs.setAttribute("class","rinda");
+               divs.innerHTML=(i+1)+")";
+               let ievads1 = document.createElement("INPUT"); ievads1.style="text-align center";
+               let ievads2 = document.createElement("INPUT"); ievads2.style="text-align center";
+               let poga = document.createElement("INPUT"); poga.value="novākt"; poga.type = "button";
+               poga.onclick=()=>{
+                   poga.parentNode.remove();              
+               }
+               divs.appendChild(ievads1); divs.appendChild(ievads2); divs.appendChild(poga);
+               document.getElementByID("forma").appendChild(divs);
+           }
         </script>
     </body>
 </html>
